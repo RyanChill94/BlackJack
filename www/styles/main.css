@@ -1,0 +1,178 @@
+/*reset*/
+
+body {
+    margin: 0;
+    padding: 0;
+}
+/*登录框*/
+
+#loginWrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(5, 5, 5, .6);
+    text-align: center;
+    color: #fff;
+    display: block;
+    padding-top: 200px;
+}
+
+#nickWrapper {
+    display: none;
+}
+
+div {
+    box-sizing: border-box;
+}
+/*主界面*/
+
+.fixTitle {
+    width: 100%;
+    background: #362c46;
+    position: fixed;
+    top: 0;
+    color: aliceblue;
+}
+
+.fixTitle span {
+    line-height: 30px;
+}
+
+span {
+    line-height: 18px;
+    font-size: 18px;
+}
+
+.btn {
+    outline: none;
+    border: none;
+    border-radius: 18px;
+    background: dodgerblue;
+    color: azure;
+    width: 80px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.wrapper,
+.messageBox-wrap {
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8)
+}
+
+.wrapper {
+    width: 1300px;
+    height: 700px;
+    margin: 30px auto;
+    background: #ffffff;
+    padding: 20px;
+    position: relative;
+}
+
+.scoreBoard {
+    margin: 5px;
+    width: 50%;
+    height: 50px;
+    line-height: 50px;
+}
+
+.player {
+    position: absolute;
+    left: 10px;
+    width: 70%;
+}
+
+.player-info {
+    width: 800px;
+    height: 300px;
+    margin: 10px auto;
+    padding: 10px;
+    position: relative;
+    background: #E0E3DA;
+    border-radius: 10px;
+}
+
+.card-list {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    list-style: none;
+    float: left;
+}
+
+.card-list li {
+    display: inline-block;
+    width: 100px;
+    height: 150px;
+    border: 1px solid #cccccc;
+    background: #c9dec1;
+}
+
+.messageBox-wrap {
+    width: 30%;
+    height: 630px;
+    background: #E0E3DA;
+    position: absolute;
+    right: 10px;
+}
+
+.messageBox-wrap .messageBox {
+    margin: 20px auto;
+    width: 90%;
+    height: 500px;
+    background: #ffffff;
+    color: #6c6c6c;
+    overflow: auto;
+    position: relative;
+}
+
+.messageBox-wrap .messageBox p {
+    font-size: 15px;
+    line-height: 8px;
+    color: #303030;
+}
+
+.messageBox-wrap .InputBox {
+    position: absolute;
+    bottom: 35px;
+    width: 100%;
+}
+
+#btn-clear {
+    border: none;
+    width: 100%;
+    bottom: 35px;
+    height: 20px;
+    background: dodgerblue;
+    color: #F3F5F7;
+    position: absolute;
+    cursor: pointer;
+}
+
+.InputBox #messageInput {
+    position: absolute;
+    left: 0;
+    width: 80%;
+    height: 30px;
+}
+
+.InputBox #btn-send {
+    position: absolute;
+    right: 0;
+    width: 19%;
+    height: 35px;
+    outline: none;
+    border: none;
+    background: #15d156;
+    color: cornsilk;
+    cursor: pointer;
+}
+
+.time {
+    font-size: 15px;
+    color: #888888;
+}
+/*卡牌初始化*/

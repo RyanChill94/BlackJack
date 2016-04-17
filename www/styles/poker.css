@@ -1,0 +1,326 @@
+/*poker*/
+
+/*A*/
+.poker1 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat 1px -457px;
+}
+
+.poker2 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -102px -457px;
+}
+
+.poker3 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -205px -457px;
+}
+
+.poker4 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -306px -457px;
+}
+
+/*2*/
+.poker5 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -424px -913px;
+}
+
+.poker6 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -529px -913px;
+}
+
+.poker7 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -634px -913px;
+}
+
+.poker8 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -738px -913px;
+}
+
+/*3*/
+.poker9 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -424px -761px;
+}
+
+.poker10 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -529px -761px;
+}
+
+.poker11 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -634px -761px;
+}
+
+.poker12 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -735px -761px;
+}
+
+/*4*/
+.poker13 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -424px -608px;
+}
+
+.poker14 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -529px -608px;
+}
+
+.poker15 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -634px -608px;
+}
+
+.poker16 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -735px -608px;
+}
+
+/*5*/
+.poker17 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -424px -455px;
+}
+
+.poker18 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -529px -455px;
+}
+
+.poker19 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -634px -455px;
+}
+
+.poker20 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -735px -455px;
+}
+
+/*6*/
+.poker21 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -424px -303px;
+}
+
+.poker22 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -529px -303px;
+}
+
+.poker23 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -634px -303px;
+}
+
+.poker24 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -735px -303px;
+}
+
+/*7*/
+.poker25 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -424px -150px;
+}
+
+.poker26 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -529px -150px;
+}
+
+.poker27 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -634px -150px;
+}
+
+.poker28 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -735px -150px;
+}
+
+/*8*/
+.poker29 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -424px 2px;
+}
+
+.poker30 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -529px 2px;
+}
+
+.poker31 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -634px 2px;
+}
+
+.poker32 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -735px 2px;
+}
+
+/*9*/
+.poker33 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat 3px -761px;
+}
+
+.poker34 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -101px -761px;
+}
+
+.poker35 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -207px -761px;
+}
+
+.poker36 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -311px -761px;
+}
+
+/*10*/
+.poker37 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat 2px -610px;
+}
+
+.poker38 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -102px -610px;
+}
+
+.poker39 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -207px -610px;
+}
+
+.poker40 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -311px -610px;
+}
+
+/*11*/
+.poker41 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat 2px -304px;
+}
+
+.poker42 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -102px -304px;
+}
+
+.poker43 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -207px -304px;
+}
+
+.poker44 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -311px -304px;
+}
+
+/*12*/
+.poker45 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat 2px -151px;
+}
+
+.poker46 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -102px -151px;
+}
+
+.poker47 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -207px -151px;
+}
+
+.poker48 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -311px -151px;
+}
+
+/*13*/
+.poker49 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat 2px 2px;
+}
+
+.poker50 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -102px 2px;
+}
+
+.poker51 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -207px 2px;
+}
+
+.poker52 {
+    width: 101px;
+    height: 150px;
+    background: url("../content/poker.gif") no-repeat -311px -2px;
+}

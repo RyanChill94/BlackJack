@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="author" content="RyanChill">
+    <meta name="description" content="a simple multi-player card game built with node.js and websocket">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/poker.css" />
+    <link rel="stylesheet" href="styles/main.css"/>
+    <title></title>
+
+</head>
+
+<body>
+<div class="fixTitle">
+    <span>BlackJack</span>
+</div>
+<div class="wrapper">
+    <div class="player-total">当前在线玩家 :<span id="player-list">xxxxx</span></div>
+    <div class="player">
+        <div class="player-info">
+            <span class="player-nickname">等待玩家接入</span>
+            <span class="player-status">未准备</span>
+            <input type="button" class="btn btn-ready" value="准备好了" />
+            <input type="button" class="btn btn-add" value="加张牌" />
+            <input type="button" class="btn btn-end" value="不要了" />
+            <div class="scoreBoard">
+                <span>得分:</span>
+                <p class="score"></p>
+            </div>
+
+            <ul class="card-list" id="card-list-1">
+
+            </ul>
+        </div>
+        <div class="player-info">
+            <span class="player-nickname">等待玩家接入</span>
+            <span class="player-status">未准备</span>
+            <input type="button" class="btn btn-ready" value="准备好了" />
+            <input type="button" class="btn btn-add" value="加张牌" />
+            <input type="button" class="btn btn-end" value="不要了" />
+            <div class="scoreBoard">
+                <span>得分:</span>
+                <p class="score"></p>
+            </div>
+            <ul class="card-list" id="card-list-2">
+
+            </ul>
+        </div>
+    </div>
+    <div class="messageBox-wrap">
+        <div class="messageBox">
+
+        </div>
+        <input type="button" id="btn-clear" value="clear" />
+
+        <div class="InputBox">
+            <input type="text" id="messageInput" placeholder="输入文本" />
+            <input type="button" id="btn-send" value="发送" />
+        </div>
+    </div>
+</div>
+<div id="loginWrapper">
+<p id="info">connecting to server...</p>
+
+<div id="nickWrapper">
+    <input type="text" placeHolder="nickname" id="nicknameInput"/>
+    <input type="button" value="OK" id="loginBtn"/>
+</div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="scripts/blackJack.js"></script>
+</body>
+
+</html>
