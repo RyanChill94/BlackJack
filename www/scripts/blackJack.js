@@ -8,16 +8,16 @@ window.onload = function () {
     blackJack.init();
 };
 
-function BlackJack(){
+function BlackJack() {
 
     this.socket = null;
 }
 
-function $(selector){
+function $(selector) {
     return document.querySelector(selector);
 }
 
-function $$(selector){
+function $$(selector) {
     return document.querySelectorAll(selector);
 }
 
@@ -27,6 +27,10 @@ BlackJack.prototype = {
     //初始化
     init: function () {
         var that = this;
+        var name = "";
+        var playerPos = -1;
+        var aReady = $$(".btn-ready"), oAdd = $$(".btn-add"), oEnd = $$(".btn-end");
+        var readyNum = 0;
 
         /*-------------------------------
          *
@@ -58,7 +62,7 @@ BlackJack.prototype = {
         this.socket.on('loginSuccess', function () {
             document.title = 'BlackJack | ' + document.getElementById('nicknameInput').value;
             document.getElementById('loginWrapper').style.display = 'none';
-            bindEvent();
+
 
         });
 
@@ -91,6 +95,7 @@ BlackJack.prototype = {
                 var pos = userNickname.indexOf(play_nickname[0].textContent) > -1 ? 1 : 0;
                 play_nickname[pos].textContent = nickName;
                 play_status[pos].textContent = userInfo.status == 0 ? "未准备" : "已准备";
+                event("bind");
             } else {
 
                 //有玩家登出 恢复初始状态
@@ -110,16 +115,20 @@ BlackJack.prototype = {
         });
 
         //监听玩家发起的准备
-        this.socket.on('ready', function (user, userInfo) {
+        this.socket.on('ready', function (user, userInfo, rm) {
                 that._updateReady(user, userInfo);
+                readyNum = rm;
+                console.log(readyNum);
             }
         );
 
         //游戏开始
-        this.socket.on('start', function (usersNickname, aCard) {
+        this.socket.on('start', function (json) {
             alert("游戏开始了");
-            that._initCardList(usersNickname, aCard);
-            that._initScore(aCard);
+            if ($$("#card-list-1 li").length == 0 && $$("#card-list-2 li").length == 0) {
+                that._initCardList(json.userNickname, json.aCard);
+                that._initScore(json.aCard);
+            }
         });
 
         //加牌
@@ -132,7 +141,7 @@ BlackJack.prototype = {
         this.socket.on("end", function (usersNickname, pos) {
             alert(usersNickname[pos] + "输了");
             //alert(usersNickname[1-pos] + "赢了");
-            that.cancelEvent();
+            event("cancel");
         });
 
         //双方不加牌结束
@@ -148,7 +157,7 @@ BlackJack.prototype = {
             } else {
                 alert(usersNickname[1] + "赢了");
             }
-            that.cancelEvent();
+            event("cancel");
         });
 
 
@@ -159,7 +168,7 @@ BlackJack.prototype = {
          * -------------------------------------*/
 
         //玩家登录
-        document.getElementById('loginBtn').addEventListener('click', function () {
+        $('#loginBtn').addEventListener('click', function () {
             var nickName = document.getElementById('nicknameInput').value;
             if (nickName.trim().length != 0) {
                 that.socket.emit('login', nickName);
@@ -168,9 +177,9 @@ BlackJack.prototype = {
             }
         }, false);
 
-        document.getElementById('nicknameInput').addEventListener('keyup', function (e) {
+        $('#nicknameInput').addEventListener('keyup', function (e) {
             if (e.keyCode == 13) {
-                var nickName = document.getElementById('nicknameInput').value;
+                var nickName = this.value;
                 if (nickName.trim().length != 0) {
                     that.socket.emit('login', nickName);
                 }
@@ -178,8 +187,8 @@ BlackJack.prototype = {
         }, false);
 
         //绑定按钮点击事件
-        document.getElementById('btn-send').addEventListener('click', function () {
-            var messageInput = document.getElementById('messageInput'),
+        $('#btn-send').addEventListener('click', function () {
+            var messageInput = $('#messageInput'),
                 msg = messageInput.value;
 
             messageInput.value = '';
@@ -193,8 +202,8 @@ BlackJack.prototype = {
         }, false);
 
         //绑定键盘事件
-        document.getElementById('messageInput').addEventListener('keyup', function (e) {
-            var messageInput = document.getElementById('messageInput'),
+        $('#messageInput').addEventListener('keyup', function (e) {
+            var messageInput = $('#messageInput'),
                 msg = messageInput.value;
 
             if (e.keyCode == 13 && msg.trim().length != 0) {
@@ -203,42 +212,49 @@ BlackJack.prototype = {
                 that._displayNewMsg('me', msg);
             }
         }, false);
-        document.getElementById('btn-clear').addEventListener('click', function () {
-            document.getElementsByClassName('messageBox')[0].innerHTML = '';
+
+        $('#btn-clear').addEventListener('click', function () {
+            $$('.messageBox')[0].innerHTML = '';
         }, false);
 
 
-        var aReady = $$(".btn-ready"),oAdd = $$(".btn-add"),oEnd = $$(".btn-end");
+        function event(type) {
+            name = (document.title).split("|")[1].toString().substring(1);
+            //console.log($$('.player-nickname')[0].textContent,name);
+            //console.log($$('.player-nickname')[0].textContent ==　name);
+            playerPos = $$('.player-nickname')[0].textContent == name ? 0 : 1;
 
-
-        var readyHandler = function(){
-            alert(playerPos);
-            $$(".player-status")[playerPos].textContent = "准备中";
-            that.socket.emit('onReady', playerPos);
-        };
-        var addHandler = function(){ that.socket.emit('onAdd', playerPos);};
-        var endHandler = function(){ that.socket.emit('onFinish', playerPos);
-            this.setAttribute("disable","disabled");};
-
-        function bindEvent(){
-            var name = (document.title).split("|")[1].substring(1);
-            var playerPos = that.same($$('.player-nickname')[0],name) ? 0 : 1;
-            console.log("事件绑定的时候",playerPos);
-            aReady[playerPos].addEventListener("click",readyHandler);
-            oAdd[playerPos].addEventListener("click",addHandler);
-            oEnd[playerPos].addEventListener("click",endHandler);
+            var readyHandler = function () {
+                $$(".player-status")[playerPos].textContent = "准备中";
+                that.socket.emit('onReady', playerPos);
+            };
+            var addHandler = function () {
+                if (readyNum < 2) {
+                    alert("还没够人，再等等");
+                } else {
+                    alert("trigger");
+                    that.socket.emit('onAdd', playerPos);
+                }
+            };
+            var endHandler = function () {
+                if (readyNum < 2) {
+                    alert("还没开始你就不想玩");
+                } else {
+                    that.socket.emit('onFinish', playerPos);
+                    this.setAttribute("disable", "disabled");
+                }
+            };
+            if (type === "bind") {
+                aReady[playerPos].addEventListener("click", readyHandler, false);
+                oAdd[playerPos].addEventListener("click", addHandler, false);
+                oEnd[playerPos].addEventListener("click", endHandler, false);
+            } else if (type === "cancel") {
+                //alert("i am trigger");
+                aReady[playerPos].removeEventListener("click", readyHandler, false);
+                oAdd[playerPos].removeEventListener("click", addHandler, false);
+                oEnd[playerPos].removeEventListener("click", endHandler, false);
+            }
         }
-
-        function cancelEvent(){
-            var name = (document.title).split("|")[1].substring(1);
-            var playerPos = that.same(name, $$('.player-nickname')[0]) ? 0 : 1;
-            aReady[playerPos].removeEventListener("click",readyHandler,false);
-            oAdd[playerPos].removeEventListener("click",addHandler,false);
-            oEnd[playerPos].removeEventListener("click",endHandler,false);
-        }
-
-
-
 
     },
 
@@ -274,9 +290,8 @@ BlackJack.prototype = {
 
     _initCardList: function (usersNickname, aCard) {
         //nikeName ["小明 小花"]   aCard[[1,6][8,50]]
-        var playerList1 = document.getElementById("card-list-1");
-        var playerList2 = document.getElementById("card-list-2");
-
+        var playerList1 = $("#card-list-1");
+        var playerList2 = $("#card-list-2");
 
         for (var i = 0; i < aCard[0].length; i++) {
             var li = document.createElement("li");
@@ -365,10 +380,6 @@ BlackJack.prototype = {
             sum += array[i];
         }
         return sum;
-    },
-
-    same: function (node,string) {
-        return node.textContent === string;
     }
 
 };
