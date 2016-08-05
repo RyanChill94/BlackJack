@@ -84,13 +84,14 @@ io.sockets.on('connection', function (socket) {
             //生成随机数
             getRandomNum(aCard[pos], 1, 52, 2);
         }
-        socket.broadcast.emit('ready', socket.nickname, users[pid]);
+        socket.emit('ready', socket.nickname, users[pid],ready_num);
+        socket.broadcast.emit('ready', socket.nickname, users[pid],ready_num);
 
         //游戏开始
         if (ready_num == 2) {
 
-            socket.emit("start", usersNickname, aCard);
-            socket.broadcast.emit("start", usersNickname, aCard);
+            socket.emit("start", {userNickname:usersNickname, aCard:aCard});
+            socket.broadcast.emit("start", {userNickname:usersNickname, aCard:aCard});
 
         }
     });
