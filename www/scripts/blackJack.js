@@ -8,10 +8,18 @@ window.onload = function () {
     blackJack.init();
 };
 
-var BlackJack = function () {
+function BlackJack(){
 
     this.socket = null;
-};
+}
+
+function $(selector){
+    return document.querySelector(selector);
+}
+
+function $$(selector){
+    return document.querySelectorAll(selector);
+}
 
 BlackJack.prototype = {
 
@@ -31,7 +39,7 @@ BlackJack.prototype = {
 
         //监听连接事件
         this.socket.on('connect', function () {
-            document.getElementById('info').textContent = '请输入你的昵称';
+            $('#info').textContent = '请输入你的昵称';
             document.getElementById('nickWrapper').style.display = 'block';
             document.getElementById('nicknameInput').focus();
         });
@@ -50,7 +58,8 @@ BlackJack.prototype = {
         this.socket.on('loginSuccess', function () {
             document.title = 'BlackJack | ' + document.getElementById('nicknameInput').value;
             document.getElementById('loginWrapper').style.display = 'none';
-            //document.getElementById('messageInput').focus();
+            bindEvent();
+
         });
 
         //登录失败
@@ -123,14 +132,15 @@ BlackJack.prototype = {
         this.socket.on("end", function (usersNickname, pos) {
             alert(usersNickname[pos] + "输了");
             //alert(usersNickname[1-pos] + "赢了");
+            that.cancelEvent();
         });
 
         //双方不加牌结束
         this.socket.on("finish", function (usersNickname, aCard) {
             var playerScore1 = that._countScore(aCard[0]);
             var playerScore2 = that._countScore(aCard[1]);
-            console.log(playerScore1);
-            console.log(playerScore2);
+            //console.log(playerScore1);
+            //console.log(playerScore2);
             if (playerScore1 > playerScore2) {
                 alert(usersNickname[0] + "赢了");
             } else if (playerScore1 == playerScore2) {
@@ -138,6 +148,7 @@ BlackJack.prototype = {
             } else {
                 alert(usersNickname[1] + "赢了");
             }
+            that.cancelEvent();
         });
 
 
@@ -196,35 +207,39 @@ BlackJack.prototype = {
             document.getElementsByClassName('messageBox')[0].innerHTML = '';
         }, false);
 
-        //玩家准备
-        var aReady = document.getElementsByClassName("btn-ready");
-        for (var i = 0; i < aReady.length; i++) {
-            aReady[i].index = i;
-            aReady[i].addEventListener("click", function () {
-                document.getElementsByClassName("player-status")[this.index].textContent = "准备中";
-                that.socket.emit('onReady', this.index);
-            })
+
+        var aReady = $$(".btn-ready"),oAdd = $$(".btn-add"),oEnd = $$(".btn-end");
+
+
+        var readyHandler = function(){
+            alert(playerPos);
+            $$(".player-status")[playerPos].textContent = "准备中";
+            that.socket.emit('onReady', playerPos);
+        };
+        var addHandler = function(){ that.socket.emit('onAdd', playerPos);};
+        var endHandler = function(){ that.socket.emit('onFinish', playerPos);
+            this.setAttribute("disable","disabled");};
+
+        function bindEvent(){
+            var name = (document.title).split("|")[1].substring(1);
+            var playerPos = that.same($$('.player-nickname')[0],name) ? 0 : 1;
+            console.log("事件绑定的时候",playerPos);
+            aReady[playerPos].addEventListener("click",readyHandler);
+            oAdd[playerPos].addEventListener("click",addHandler);
+            oEnd[playerPos].addEventListener("click",endHandler);
         }
 
-        //玩家加牌
-        var oAdd = document.getElementsByClassName("btn-add");
-        for (var i = 0; i < oAdd.length; i++) {
-            oAdd[i].index = i;
-            oAdd[i].addEventListener("click", function () {
-                that.socket.emit('onAdd', this.index);
-            })
-
+        function cancelEvent(){
+            var name = (document.title).split("|")[1].substring(1);
+            var playerPos = that.same(name, $$('.player-nickname')[0]) ? 0 : 1;
+            aReady[playerPos].removeEventListener("click",readyHandler,false);
+            oAdd[playerPos].removeEventListener("click",addHandler,false);
+            oEnd[playerPos].removeEventListener("click",endHandler,false);
         }
 
-        //玩家放弃加牌
-        var oEnd = document.getElementsByClassName("btn-end");
-        for (var i = 0; i < oAdd.length; i++) {
-            oEnd[i].index = i;
-            oEnd[i].addEventListener("click", function () {
-                //oAdd[this.index].setAttribute(disabled,"disabled");
-                that.socket.emit('onFinish', this.index);
-            })
-        }
+
+
+
     },
 
 
@@ -350,6 +365,10 @@ BlackJack.prototype = {
             sum += array[i];
         }
         return sum;
+    },
+
+    same: function (node,string) {
+        return node.textContent === string;
     }
 
 };

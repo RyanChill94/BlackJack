@@ -36,7 +36,6 @@ io.sockets.on('connection', function (socket) {
 
             usersNickname.push(nickname);
             //挂载属性
-            socket.userIndex = users.length;
             socket.nickname = nickname;
 
             //初始化玩家信息
